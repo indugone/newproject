@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indu ❤️ Ganesh</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:black;color:white;overflow:hidden}
+
+/* Galaxy Canvas */
+canvas{position:fixed;top:0;left:0;z-index:-2}
+
+/* Floating Particles */
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
+
+/* Main Section */
+section{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+h1{font-size:40px;text-shadow:0 0 20px #ff2e63;margin-bottom:15px}
+
+/* Slideshow */
+.slideshow{
+width:220px;height:220px;border-radius:50%;
+overflow:hidden;border:5px solid #ff2e63;
+box-shadow:0 0 50px #ff2e63;margin-bottom:15px;
+}
+.slideshow img{
+width:100%;height:100%;object-fit:cover;
+transition:opacity 1s ease-in-out;
+}
+
+/* Buttons */
+button{
+padding:12px 25px;margin:8px;border:none;
+border-radius:30px;background:#ff2e63;color:white;
+font-size:15px;cursor:pointer;transition:0.3s;
+}
+button:hover{transform:scale(1.1)}
+
+#timer{margin-top:10px}
+#letter{max-width:700px;margin-top:20px;min-height:100px}
+
+/* Proposal Scene */
+#proposalScene{
+position:fixed;top:0;left:0;width:100%;height:100%;
+background:black;display:none;
+justify-content:center;align-items:center;
+flex-direction:column;z-index:9999;
+}
+
+.ring-box{
+font-size:90px;
+animation:openBox 2s forwards;
+}
+
+@keyframes openBox{
+0%{transform:scale(0) rotate(0deg)}
+100%{transform:scale(1.2) rotate(360deg)}
+}
+
+.proposal-text{
+font-size:42px;color:#ff2e63;
+text-shadow:0 0 40px #ff2e63;margin:20px 0;
+}
+
+/* Fireworks */
+.firework{
+position:fixed;width:4px;height:4px;
+background:white;border-radius:50%;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="galaxy"></canvas>
+
+<section>
+<h1>Indu ❤️ Ganesh</h1>
+
+<div class="slideshow">
+<img id="slide" src="https://via.placeholder.com/220">
+</div>
+<input type="file" accept="image/*" multiple onchange="loadSlides(event)">
+
+<div id="timer"></div>
+
+<button onclick="startLetter()">💌 Immortal Letter</button>
+<button onclick="startProposal()">💍 Ultimate Proposal</button>
+<button onclick="toggleMusic()">🎵 Music</button>
+
+<div id="letter"></div>
+</section>
+
+<div id="proposalScene">
+<div class="ring-box">💍</div>
+<div class="proposal-text">Ganesh, Will You Be Mine Forever?</div>
+<div>
+<button onclick="celebrate()">YES ❤️</button>
+<button onclick="moveNo(this)">NO 😈</button>
+</div>
+</div>
+
+<audio id="bgMusic" loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
+
+<script>
+
+/* TIMER */
+const loveDate=new Date(2023,0,1);
+setInterval(()=>{
+const now=new Date();
+const diff=now-loveDate;
+const d=Math.floor(diff/86400000);
+const h=Math.floor(diff/3600000)%24;
+const m=Math.floor(diff/60000)%60;
+const s=Math.floor(diff/1000)%60;
+document.getElementById("timer").innerText=
+`Together for ${d} days ${h}h ${m}m ${s}s 💖`;
+},1000);
+
+/* LETTER */
+function startLetter(){
+const text="Ganesh ❤️ In every lifetime, every universe, my soul will search for yours. You are my forever story written in the stars.";
+let i=0;const el=document.getElementById("letter");
+el.innerHTML="";
+const int=setInterval(()=>{
+el.innerHTML+=text[i];i++;
+if(i>=text.length)clearInterval(int);
+},30);
+}
+
+/* SLIDESHOW */
+let slides=[];let index=0;
+function loadSlides(e){
+slides=[];
+for(let file of e.target.files){
+const reader=new FileReader();
+reader.onload=()=>{slides.push(reader.result)};
+reader.readAsDataURL(file);
+}
+setTimeout(startSlideshow,1000);
+}
+function startSlideshow(){
+if(slides.length===0)return;
+setInterval(()=>{
+index=(index+1)%slides.length;
+document.getElementById("slide").src=slides[index];
+},3000);
+}
+
+/* PROPOSAL */
+function startProposal(){
+document.getElementById("proposalScene").style.display="flex";
+}
+
+/* Fireworks */
+function celebrate(){
+for(let i=0;i<150;i++){
+let fw=document.createElement("div");
+fw.className="firework";
+fw.style.left=Math.random()*100+"vw";
+fw.style.top=Math.random()*100+"vh";
+document.body.appendChild(fw);
+let angle=Math.random()*2*Math.PI;
+let speed=Math.random()*5+2;
+let x=0,y=0;
+let interval=setInterval(()=>{
+x+=Math.cos(angle)*speed;
+y+=Math.sin(angle)*speed;
+fw.style.transform=`translate(${x}px,${y}px)`;
+fw.style.opacity-=0.02;
+if(fw.style.opacity<=0){clearInterval(interval);fw.remove();}
+},20);
+}
+}
+
+/* RUNNING NO */
+function moveNo(btn){
+btn.style.position="absolute";
+btn.style.left=Math.random()*80+"%";
+btn.style.top=Math.random()*80+"%";
+}
+
+/* MUSIC */
+function toggleMusic(){
+const m=document.getElementById("bgMusic");
+m.paused?m.play():m.pause();
+}
+
+/* Galaxy Background */
+const canvas=document.getElementById("galaxy");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;canvas.height=innerHeight;
+let stars=[];
+for(let i=0;i<600;i++){
+stars.push({x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2});
+}
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="white";
+stars.forEach(s=>{
+ctx.beginPath();
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+ctx.fill();
+});
+requestAnimationFrame(draw);
+}
+draw();
+
+/* Shooting star */
+document.addEventListener("click",e=>{
+let star=document.createElement("div");
+star.style.position="fixed";
+star.style.left=e.clientX+"px";
+star.style.top=e.clientY+"px";
+star.style.width="4px";
+star.style.height="4px";
+star.style.background="white";
+star.style.boxShadow="0 0 20px white";
+star.style.transition="1s";
+document.body.appendChild(star);
+setTimeout(()=>{
+star.style.transform="translate(300px,300px)";
+star.style.opacity=0;
+},10);
+setTimeout(()=>star.remove(),1000);
+});
+</script>
+
+</body>
+</html>
+
