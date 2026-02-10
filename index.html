@@ -3,18 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Indu ❤️ Ganesh</title>
+<title>Indu ❤️ Nana</title>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{background:black;color:white;overflow:hidden}
-
-/* Galaxy Canvas */
 canvas{position:fixed;top:0;left:0;z-index:-2}
 
-/* Floating Particles */
-#particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
-
-/* Main Section */
 section{
 height:100vh;
 display:flex;
@@ -27,7 +22,6 @@ padding:20px;
 
 h1{font-size:40px;text-shadow:0 0 20px #ff2e63;margin-bottom:15px}
 
-/* Slideshow */
 .slideshow{
 width:220px;height:220px;border-radius:50%;
 overflow:hidden;border:5px solid #ff2e63;
@@ -38,7 +32,6 @@ width:100%;height:100%;object-fit:cover;
 transition:opacity 1s ease-in-out;
 }
 
-/* Buttons */
 button{
 padding:12px 25px;margin:8px;border:none;
 border-radius:30px;background:#ff2e63;color:white;
@@ -49,7 +42,6 @@ button:hover{transform:scale(1.1)}
 #timer{margin-top:10px}
 #letter{max-width:700px;margin-top:20px;min-height:100px}
 
-/* Proposal Scene */
 #proposalScene{
 position:fixed;top:0;left:0;width:100%;height:100%;
 background:black;display:none;
@@ -72,7 +64,6 @@ font-size:42px;color:#ff2e63;
 text-shadow:0 0 40px #ff2e63;margin:20px 0;
 }
 
-/* Fireworks */
 .firework{
 position:fixed;width:4px;height:4px;
 background:white;border-radius:50%;
@@ -85,7 +76,7 @@ background:white;border-radius:50%;
 <canvas id="galaxy"></canvas>
 
 <section>
-<h1>Indu ❤️ Ganesh</h1>
+<h1>Indu ❤️ Nana</h1>
 
 <div class="slideshow">
 <img id="slide" src="https://via.placeholder.com/220">
@@ -103,7 +94,7 @@ background:white;border-radius:50%;
 
 <div id="proposalScene">
 <div class="ring-box">💍</div>
-<div class="proposal-text">Ganesh, Will You Be Mine Forever?</div>
+<div class="proposal-text">Nana, Will You Be Mine Forever?</div>
 <div>
 <button onclick="celebrate()">YES ❤️</button>
 <button onclick="moveNo(this)">NO 😈</button>
@@ -131,7 +122,7 @@ document.getElementById("timer").innerText=
 
 /* LETTER */
 function startLetter(){
-const text="Ganesh ❤️ In every lifetime, every universe, my soul will search for yours. You are my forever story written in the stars.";
+const text="Nana ❤️ In every lifetime, every universe, my soul will search for yours. You are my forever story written in the stars.";
 let i=0;const el=document.getElementById("letter");
 el.innerHTML="";
 const int=setInterval(()=>{
@@ -220,26 +211,7 @@ requestAnimationFrame(draw);
 }
 draw();
 
-/* Shooting star */
-document.addEventListener("click",e=>{
-let star=document.createElement("div");
-star.style.position="fixed";
-star.style.left=e.clientX+"px";
-star.style.top=e.clientY+"px";
-star.style.width="4px";
-star.style.height="4px";
-star.style.background="white";
-star.style.boxShadow="0 0 20px white";
-star.style.transition="1s";
-document.body.appendChild(star);
-setTimeout(()=>{
-star.style.transform="translate(300px,300px)";
-star.style.opacity=0;
-},10);
-setTimeout(()=>star.remove(),1000);
-});
 </script>
 
 </body>
 </html>
-
